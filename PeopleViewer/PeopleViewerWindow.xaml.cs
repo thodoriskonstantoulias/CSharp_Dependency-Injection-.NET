@@ -5,12 +5,14 @@ namespace PeopleViewer
 {
     public partial class PeopleViewerWindow : Window
     {
+        //Main UI is not responsible for creating instances so we inject it through the constructor
+        //and pass it through App.xaml
         PeopleViewModel viewModel;
 
-        public PeopleViewerWindow()
+        public PeopleViewerWindow(PeopleViewModel peopleViewModel)
         {
             InitializeComponent();
-            viewModel = new PeopleViewModel();
+            viewModel = peopleViewModel;
             this.DataContext = viewModel;
         }
 

@@ -6,9 +6,11 @@ using System.Runtime.CompilerServices;
 
 namespace PeopleViewer.Presentation
 {
+    //We make the constructor suitable for dependency injection
     public class PeopleViewModel : INotifyPropertyChanged
     {
-        protected ServiceReader DataReader;
+        //Adding dependency injection 
+        protected IPersonReader DataReader;
 
         private IEnumerable<Person> _people;
 
@@ -24,9 +26,9 @@ namespace PeopleViewer.Presentation
             }
         }
 
-        public PeopleViewModel()
+        public PeopleViewModel(IPersonReader dataReader)
         {
-            DataReader = new ServiceReader();
+            DataReader = dataReader;
         }
 
         public void RefreshPeople()
