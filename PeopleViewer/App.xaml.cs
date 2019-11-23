@@ -1,5 +1,6 @@
 ﻿using PeopleViewer.Presentation;
 using PersonDataReader.CSV;
+using PersonDataReader.Decorators;
 using PersonDataReader.Service;
 using System.Windows;
 
@@ -20,7 +21,11 @@ namespace PeopleViewer
         {
             //With dependency injection we can switch to another service easily
             //var reader = new ServiceReader();
-            var reader = new CSVReader();
+            //var reader = new CSVReader();
+
+            //Adding cache functionality with dependency injection
+            var wrappedReader = new ServiceReader();
+            var reader = new CachingReader(wrappedReader);
             var viewModel = new PeopleViewModel(reader);
             Application.Current.MainWindow = new PeopleViewerWindow(viewModel);
         }
