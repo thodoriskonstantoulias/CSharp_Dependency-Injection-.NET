@@ -1,4 +1,5 @@
 ﻿using PeopleViewer.Presentation;
+using PersonDataReader.CSV;
 using PersonDataReader.Service;
 using System.Windows;
 
@@ -15,11 +16,14 @@ namespace PeopleViewer
             Application.Current.MainWindow.Show();
         }
 
-        private static void ComposeObjects()
+        private static void ComposeObjects() 
         {
-            var reader = new ServiceReader();
+            //With dependency injection we can switch to another service easily
+            //var reader = new ServiceReader();
+            var reader = new CSVReader();
             var viewModel = new PeopleViewModel(reader);
             Application.Current.MainWindow = new PeopleViewerWindow(viewModel);
         }
     }
 }
+
